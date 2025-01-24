@@ -1,8 +1,26 @@
 [package]
-name = "template"
+name = "data-forge-rs"
 version = "0.1.0"
 edition = "2021"
 
+[[example]]
+name = "arrow_serde"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[[example]]
+name = "ndjson"
+
+[[example]]
+name = "exp_parquet"
 
 [dependencies]
+anyhow = "1.0.95"
+arrow = { version = "54.0.0", features = ["prettyprint"] }
+datafusion = { version = "44.0.0", features = ["serde"] }
+parquet = "54.0.0"
+polars = { version = "0.45.1", features = ["lazy", "parquet", "sql"] }
+serde = { version = "1.0.217", features = ["derive"] }
+tokio = { version = "1.43.0", features = ["rt-multi-thread", "rt", "macros"] }
+tokio-stream = "0.1.17"
+clap = { version = "4.5.27", features = ["derive"] }
+reedline-repl-rs = { version = "1.2.1", features = ["derive"] }
+
