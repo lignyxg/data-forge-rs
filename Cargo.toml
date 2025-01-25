@@ -23,4 +23,5 @@ tokio = { version = "1.43.0", features = ["rt-multi-thread", "rt", "macros"] }
 tokio-stream = "0.1.17"
 clap = { version = "4.5.27", features = ["derive"] }
 reedline-repl-rs = { version = "1.2.1", features = ["derive"] }
+crossbeam-channel = "0.5.14"
 

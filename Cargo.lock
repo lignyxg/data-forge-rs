@@ -1156,6 +1156,7 @@ dependencies = [
  "anyhow",
  "arrow 54.0.0",
  "clap",
+ "crossbeam-channel",
  "datafusion",
  "parquet 54.0.0",
  "polars",
