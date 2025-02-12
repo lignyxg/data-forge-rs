@@ -1,6 +1,6 @@
 use arrow::array::AsArray as _;
 use datafusion::arrow::array::AsArray;
-use datafusion::prelude::{ParquetReadOptions, SessionContext};
+use datafusion::prelude::{ParquetReadOptions, SessionConfig, SessionContext};
 use parquet::arrow::arrow_reader::ParquetRecordBatchReaderBuilder;
 use polars::prelude::*;
 use polars::sql::SQLContext;
@@ -24,6 +24,7 @@ async fn main() -> anyhow::Result<()> {
 
     println!("------ read with polars2 ------");
     read_with_polars2(file)?;
+
     Ok(())
 }
 
@@ -60,9 +61,13 @@ async fn read_with_datafusion(file: &str) -> anyhow::Result<()> {
 }
 
 async fn read_with_datafusion2(file: &str) -> anyhow::Result<()> {
-    let ctx = SessionContext::new();
+    let mut config = SessionConfig::new();
+    config.options_mut().catalog.information_schema = true;
+    let ctx = SessionContext::new_with_config(config);
     ctx.register_parquet("stats", file, ParquetReadOptions::new())
         .await?;
+    let df = ctx.sql("show tables").await?;
+    df.show().await?;
     let df = ctx
         .sql("SELECT email, name FROM stats limit 3")
         .await?

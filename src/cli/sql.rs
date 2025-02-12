@@ -1,16 +1,11 @@
-use crate::ReplContext;
+use crate::cli::ReplCommand;
+use crate::{Backend, CmdExecutor, ReplContext, ReplDisplay, ReplMsg};
 use clap::{ArgMatches, Parser};
 
 #[derive(Debug, Parser)]
 pub struct SqlOpts {
-    #[arg(long, help = "SQL query")]
+    #[arg(help = "SQL query")]
     pub sql: String,
-}
-
-impl From<SqlOpts> for super::ReplCommand {
-    fn from(value: SqlOpts) -> Self {
-        super::ReplCommand::Sql(value)
-    }
 }
 
 impl SqlOpts {
@@ -28,7 +23,14 @@ pub fn sql(
         .expect("sql not found")
         .to_owned();
 
-    let cmd = SqlOpts::new(sql);
-    context.send(cmd.into());
-    Ok(None)
+    let cmd = ReplCommand::Sql(SqlOpts::new(sql));
+    let (msg, rx) = ReplMsg::new(cmd);
+    Ok(context.send(msg, rx))
+}
+
+impl CmdExecutor for SqlOpts {
+    async fn execute<T: Backend>(self, backend: &mut T) -> anyhow::Result<String> {
+        let df = backend.sql(self).await?;
+        df.display().await
+    }
 }

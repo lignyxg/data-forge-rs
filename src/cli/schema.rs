@@ -4,18 +4,18 @@ use clap::Parser;
 use reedline_repl_rs::clap::ArgMatches;
 
 #[derive(Debug, Parser)]
-pub struct DescribeOpts {
+pub struct SchemaOpts {
     #[arg(help = "Dataset name")]
     pub name: String,
 }
 
-impl DescribeOpts {
+impl SchemaOpts {
     pub fn new(name: String) -> Self {
         Self { name }
     }
 }
 
-pub fn describe(
+pub fn schema(
     args: ArgMatches,
     context: &mut ReplContext,
 ) -> reedline_repl_rs::Result<Option<String>> {
@@ -24,14 +24,14 @@ pub fn describe(
         .expect("name not found")
         .to_owned();
 
-    let cmd = ReplCommand::Describe(DescribeOpts::new(name));
+    let cmd = ReplCommand::Schema(SchemaOpts::new(name));
     let (msg, rx) = ReplMsg::new(cmd);
     Ok(context.send(msg, rx))
 }
 
-impl CmdExecutor for DescribeOpts {
+impl CmdExecutor for SchemaOpts {
     async fn execute<T: Backend>(self, backend: &mut T) -> anyhow::Result<String> {
-        let df = backend.describe(self).await?;
+        let df = backend.schema(self).await?;
         df.display().await
     }
 }

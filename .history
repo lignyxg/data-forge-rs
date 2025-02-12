@@ -1,0 +1,50 @@
+connect assets/sample.parquet -n sample
+list
+describe sample
+connect assets/sample.parquet -n sample
+describe sample
+list
+connect assets/sample.parquet -n sample
+list
+connect assets/sample.parquet -n users
+list
+connect assets/sample.parquet -n users
+list
+connect assets/sample.parquet -n users
+list
+connect assets/sample.parquet -n users
+list
+connect assets/sample.parquet -n users
+list
+connect assets/sample.parquet -n users
+list
+connect assets/sample.parquet -n users
+list
+describe users
+sql "select email, name, gender from users limit 3"
+connect assets/sample.parquet -n users
+describe users
+schema users
+connect assets/sample.parquet -n users
+list
+describe users
+connect assets/sample.parquet -n users
+sql "select count(*) as nums gender from users"
+sql "select count(*) as nums from users"
+connect assets/users.ndjson -n sample
+list
+schema sample
+schema users
+sql "select count(*) as nums from sample"
+connect assets/users.ndjson -n sample
+list
+describe users
+describe sample
+sql "select count(*) as nums from sample"
+sql "select email, name from sample limit 2"
+connect assets/users.ndjson -n sample
+list
+sql "select email, name from sample limit 2"
+connect assets/sample.parquet -n sample2
+list
+sql "select email, name from sample2 limit 2"

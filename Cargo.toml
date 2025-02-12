@@ -24,4 +24,6 @@ tokio-stream = "0.1.17"
 clap = { version = "4.5.27", features = ["derive"] }
 reedline-repl-rs = { version = "1.2.1", features = ["derive"] }
 crossbeam-channel = "0.5.14"
+enum_dispatch = "0.3.13"
+oneshot = "0.1.10"
 
