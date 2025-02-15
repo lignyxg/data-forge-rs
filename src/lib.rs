@@ -33,13 +33,13 @@ pub(crate) trait CmdExecutor {
 }
 
 pub(crate) trait Backend {
-    type DataFrame: ReplDisplay; // 不希望Backend和某个特定的数据结构绑定，同时希望数据的展示能在CmdExecutor这一层的实现中完成
+    // type DataFrame: ReplDisplay; // 不希望Backend和某个特定的数据结构绑定，同时希望数据的展示能在CmdExecutor这一层的实现中完成
     async fn connect(&mut self, opts: &ConnectOpts) -> anyhow::Result<()>;
-    async fn list(&self) -> anyhow::Result<Self::DataFrame>;
-    async fn schema(&self, opts: SchemaOpts) -> anyhow::Result<Self::DataFrame>;
-    async fn describe(&self, opts: DescribeOpts) -> anyhow::Result<Self::DataFrame>;
-    async fn head(&self, opts: HeadOpts) -> anyhow::Result<Self::DataFrame>;
-    async fn sql(&self, opts: SqlOpts) -> anyhow::Result<Self::DataFrame>;
+    async fn list(&self) -> anyhow::Result<impl ReplDisplay>;
+    async fn schema(&self, opts: SchemaOpts) -> anyhow::Result<impl ReplDisplay>;
+    async fn describe(&self, opts: DescribeOpts) -> anyhow::Result<impl ReplDisplay>;
+    async fn head(&self, opts: HeadOpts) -> anyhow::Result<impl ReplDisplay>;
+    async fn sql(&self, opts: SqlOpts) -> anyhow::Result<impl ReplDisplay>;
 }
 
 pub(crate) trait ReplDisplay {
