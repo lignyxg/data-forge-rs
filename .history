@@ -62,3 +62,29 @@ connect assets/sample.parquet -n sample2
 describe sample2
 connect assets/sample.parquet -n sample2
 describe sample2
+connect assets/sample.parquet -n sample2
+describe sample2
+schema sample2
+connect assets/sample.parquet -n sample2
+describe sample2
+connect assets/sample.parquet -n sample2
+describe sample2
+connect assets/sample.parquet -n sample2
+describe sample2
+connect assets/sample.parquet -n sample2
+describe sample2
+connect assets/sample.parquet -n sample2
+describe sample2
+connect assets/sample.parquet -n sample2
+describe sample2
+schema sample2
+connect assets/sample.parquet -n sample2
+describe sample2
+connect assets/sample.parquet -n sample2
+describe sample2
+connect assets/sample.parquet -n sample2
+describe sample2
+connect assets/sample.parquet -n sample2
+describe sample2
+connect assets/sample.parquet -n sample2
+describe sample2

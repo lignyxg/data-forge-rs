@@ -1,7 +1,7 @@
 pub mod backend;
 pub mod cli;
 
-use crate::backend::data_fusion::DataFusionBackend;
+use crate::backend::df::DataFusionBackend;
 use crate::cli::*;
 use crossbeam_channel as mpsc;
 use enum_dispatch::enum_dispatch;
